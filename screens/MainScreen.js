@@ -1,14 +1,22 @@
-import {StyleSheet, Text, View} from 'react-native';
-import {useContext} from 'react';
-import {QuizzContext} from '../store/app_context';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const MainScreen = () => {
-  const {quizzEasy, quizzNormal, quizzHard} = useContext(QuizzContext);
-  console.log('MAIN SCREEN --',quizzEasy)
-
+const MainScreen = ({navigation}) => {
   return (
     <View>
-      <Text>MainScreen</Text>
+      <SafeAreaView>
+        <TouchableOpacity onPress={() => navigation.navigate('GameScreen')}>
+          <Text>GAME</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('StatuteScreen')}>
+          <Text>RULES</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </View>
   );
 };

@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppProvider} from './store/app_context';
-import {MainScreen} from './screens';
+import {GameScreen, LevelScreen, MainScreen, StatuteScreen} from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +11,9 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="MainScreen" component={MainScreen} />
+          <Stack.Screen name="GameScreen" component={GameScreen} />
+          <Stack.Screen name="StatuteScreen" component={StatuteScreen} />
+          <Stack.Screen name="LevelScreen" component={LevelScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>

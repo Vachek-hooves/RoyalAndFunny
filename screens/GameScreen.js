@@ -1,14 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {SafeAreaView} from 'react-native';
+import {Level} from '../components/GameScreen';
 
-const GameScreen = () => {
+const GameScreen = ({navigation}) => {
+  function navigateLevel(level) {
+    navigation.navigate('LevelScreen', {level});
+  }
+
   return (
-    <View>
-      <Text>GameScreen</Text>
-    </View>
+    <SafeAreaView>
+      <Level text="EASY" onPress={() => navigateLevel('easy')} />
+      <Level text="NORMAL" onPress={() => navigateLevel('normal')} />
+      <Level text="HARD" onPress={() => navigateLevel('hard')} />
+    </SafeAreaView>
   );
 };
 
 export default GameScreen;
-
-const styles = StyleSheet.create({});
