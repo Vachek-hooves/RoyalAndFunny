@@ -18,3 +18,21 @@ export const fetchQuizzLevel = async level => {
     return [];
   }
 };
+
+export const saveGameScore = async data => {
+  try {
+    await AsyncStorage.setItem('score', JSON.stringify(data));
+  } catch (error) {
+    console.log('game score saving error', error);
+  }
+};
+
+export const getGameScore = async () => {
+  try {
+    const data = await AsyncStorage.getItem('score');
+    return data !== null ? JSON.parse(data) : [];
+  } catch (error) {
+    console.log('game score fetching error', error);
+    return [];
+  }
+};

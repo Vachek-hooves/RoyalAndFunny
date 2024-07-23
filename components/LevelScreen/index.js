@@ -1,2 +1,3 @@
 import RenderLevel from './RenderLevel';
-export {RenderLevel};
+import LevelItem from './LevelItem';
+export {RenderLevel, LevelItem};

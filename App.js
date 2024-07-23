@@ -1,7 +1,13 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppProvider} from './store/app_context';
-import {GameScreen, LevelScreen, MainScreen, StatuteScreen} from './screens';
+import {
+  GameScreen,
+  LevelScreen,
+  MainScreen,
+  QuizzScreen,
+  StatuteScreen,
+} from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +20,7 @@ function App() {
           <Stack.Screen name="GameScreen" component={GameScreen} />
           <Stack.Screen name="StatuteScreen" component={StatuteScreen} />
           <Stack.Screen name="LevelScreen" component={LevelScreen} />
+          <Stack.Screen name="QuizzScreen" component={QuizzScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>

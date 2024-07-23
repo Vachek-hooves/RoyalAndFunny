@@ -1,11 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {appStyles} from '../components/Styles/generalStyles';
 
 const StatuteScreen = () => {
   return (
-    <View>
-      <Text>StatuteScreen</Text>
-    </View>
+    <SafeAreaView style={appStyles.screenStyle}>
+      <ScrollView>
+        <Text>StatuteScreen</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
