@@ -2,8 +2,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {COLORS} from '../constants/colors';
 
-const GameTimer = ({setTimeOut}) => {
-  const [timer, setTimer] = useState(120);
+const GameTimer = ({setTimeOut, time}) => {
+  const [timer, setTimer] = useState(time);
 
   useEffect(() => {
     const interval = setInterval(() => {

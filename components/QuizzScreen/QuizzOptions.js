@@ -15,7 +15,7 @@ const QuizzOptions = ({
 }) => {
   return (
     <View style={styles.rootContainer}>
-      {options.map((option, index) => {
+      {options?.map((option, index) => {
         return (
           <TouchableOpacity
             key={index}

@@ -3,7 +3,7 @@ import LevelItem from './LevelItem';
 // import {useEffect, useState, useContext} from 'react';
 import useQuizzLevel from './useQuizzLevel';
 // import {QuizzContext} from '../../store/app_context';
-import {appStyles} from '../components/Styles/generalStyles';
+// import {appStyles} from '../components/Styles/generalStyles';
 
 const RenderLevel = ({level}) => {
   //   const {quizzEasy, quizzNormal, quizzHard} = useContext(QuizzContext);

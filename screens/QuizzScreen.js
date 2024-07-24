@@ -1,28 +1,15 @@
-import {
-  Modal,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import useQuizzLevel from '../components/LevelScreen/useQuizzLevel';
+import {Modal, SafeAreaView, View} from 'react-native';
 import {useState, useContext, useEffect} from 'react';
 import {
-  QuizzLevelScore,
   QuizzNextBtn,
   QuizzOptions,
   QuizzQuestion,
   QuizzStatistic,
 } from '../components/QuizzScreen';
 import {QuizzContext} from '../store/app_context';
-import {GameTimer, QuestionsIcon} from '../components/ui';
+import {GameTimer} from '../components/ui';
 import {useNavigation} from '@react-navigation/native';
-import {
-  appStyles,
-  marginVerticalCorrection,
-  optionsNextGapCorrection,
-} from '../components/Styles/generalStyles';
+import {optionsNextGapCorrection} from '../components/Styles/generalStyles';
 import {COLORS} from '../components/constants/colors';
 import QuizzModal from './QuizzModal';
 
@@ -67,6 +54,10 @@ const QuizzScreen = ({route}) => {
     activeNextLevelHandler(id, level);
     navigation.navigate('LevelScreen', {level});
   };
+
+  function navigateToQuizzLevel() {
+    navigation.navigate('LevelScreen', {level});
+  }
 
   // const setScore = () => {
   //   setScoreHandler(level, points);
@@ -114,21 +105,25 @@ const QuizzScreen = ({route}) => {
     <View style={{backgroundColor: COLORS.mainBg, flex: 1, padding: 10}}>
       <SafeAreaView>
         <QuizzStatistic
+          level={level}
           score={points}
           totalQuestions={allQuestions.length}
           currentQuestion={presentQuestionIndex + 1}
         />
         <View>
           {(level === 'normal' || level === 'hard') && (
-            <GameTimer setTimeOut={setTimeOut} />
+            <GameTimer
+              setTimeOut={setTimeOut}
+              time={level === 'normal' ? 120 : 90}
+            />
           )}
           <QuizzQuestion
-            question={allQuestions[presentQuestionIndex].question}
+            question={allQuestions[presentQuestionIndex]?.question}
           />
         </View>
         <View style={{gap: optionsNextGapCorrection()}}>
           <QuizzOptions
-            options={allQuestions[presentQuestionIndex].options}
+            options={allQuestions[presentQuestionIndex]?.options}
             onPress={checkIsValid}
             idDisabled={offOption}
             trueOption={trueOption}
@@ -138,22 +133,12 @@ const QuizzScreen = ({route}) => {
         </View>
         <Modal visible={openModal} animationType="slide" transparent={true}>
           <QuizzModal
+            level={level}
             score={points}
-            onClose={() => setOpenModal(false)}
             reset={() => restartThisLevel()}
-            activeNextLevel={() => activeNextLevel()}>
-            {/* <TouchableOpacity onPress={activeNextLevel}>
-              <Text style={{fontSize: 22, color: COLORS.blossom}}>
-                Open next level
-              </Text>
-            </TouchableOpacity> */}
-          </QuizzModal>
+            activeNextLevel={activeNextLevel}
+            toMenu={navigateToQuizzLevel}></QuizzModal>
         </Modal>
-        {/* {levelIsCompleted && (
-          <TouchableOpacity onPress={activeNextLevel}>
-            <Text style={{fontSize: 22, color: 'gray'}}>Open next level</Text>
-          </TouchableOpacity>
-        )} */}
         {/* <TouchableOpacity onPress={setScore}>
         <Text style={{fontSize: 22, color: 'gray'}}>Save score</Text>
       </TouchableOpacity> */}
@@ -163,5 +148,3 @@ const QuizzScreen = ({route}) => {
 };
 
 export default QuizzScreen;
-
-const styles = StyleSheet.create({});

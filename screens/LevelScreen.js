@@ -1,7 +1,7 @@
 import {SafeAreaView} from 'react-native';
 import {RenderLevel} from '../components/LevelScreen';
-import {appStyles} from '../components/Styles/generalStyles';
 import {COLORS} from '../components/constants/colors';
+import RestartIcon from '../components/ui/RestartIcon';
 
 const LevelScreen = ({route}) => {
   const {level} = route.params;
@@ -15,6 +15,7 @@ const LevelScreen = ({route}) => {
         alignItems: 'center',
       }}>
       <RenderLevel level={level} />
+      <RestartIcon level={level} />
     </SafeAreaView>
   );
 };

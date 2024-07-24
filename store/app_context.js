@@ -22,6 +22,7 @@ export const QuizzContext = createContext({
   activeNextLevelHandler: (id, level) => [],
   setScoreHandler: () => [],
   updateGameScore: () => [],
+  resetLevelHandler: () => [],
 });
 
 export const AppProvider = ({children}) => {
@@ -65,6 +66,13 @@ export const AppProvider = ({children}) => {
     initGameScore();
   }, []);
 
+  const resetLevelHandler = async level => {
+    try {
+      await saveQuizzLevel(QUIZZ_DATA, level);
+      setLevelHelper(level);
+    } catch (error) {}
+  };
+
   const initGameScore = async () => {
     try {
       let scoreData = await getGameScore('score');
@@ -98,6 +106,22 @@ export const AppProvider = ({children}) => {
     }
   };
 
+  const setLevelHelper = level => {
+    switch (level) {
+      case 'easy':
+        setQuizzEasy(QUIZZ_DATA);
+        break;
+      case 'normal':
+        setQuizzNormal(QUIZZ_DATA);
+        break;
+      case 'hard':
+        setQuizzHard(QUIZZ_DATA);
+        break;
+      default:
+        break;
+    }
+  };
+
   const activeNextLevelHandler = async (id, level) => {
     try {
       const currentQuizz = getLevelData(level);
@@ -112,6 +136,7 @@ export const AppProvider = ({children}) => {
         const updatedQuizz = currentQuizz.map((quizz, index) =>
           index === currentQuizzIndex + 1 ? {...quizz, isActive: true} : quizz,
         );
+        
         switch (level) {
           case 'easy':
             setQuizzEasy(updatedQuizz);
@@ -147,6 +172,7 @@ export const AppProvider = ({children}) => {
     // setScoreHandler,
     gameScore,
     updateGameScore,
+    resetLevelHandler,
   };
   return (
     <QuizzContext.Provider value={value}>{children}</QuizzContext.Provider>

@@ -1,5 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {COLORS} from '../constants/colors';
+import {View, Image} from 'react-native';
 
 const LoseIcon = () => {
   return (
@@ -13,5 +12,3 @@ const LoseIcon = () => {
 };
 
 export default LoseIcon;
-
-const styles = StyleSheet.create({});
