@@ -7,10 +7,12 @@ import {
 } from 'react-native';
 import {COLORS} from '../components/constants/colors';
 import {appStyles} from '../components/Styles/generalStyles';
+import {ProfileIcon} from '../components/ui';
 
 const MainScreen = ({navigation}) => {
   return (
     <View style={appStyles.screenStyle}>
+      <ProfileIcon />
       <SafeAreaView style={{gap: 5}}>
         <TouchableOpacity
           activeOpacity={0.7}

@@ -1,10 +1,9 @@
-import {View, Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, Text} from 'react-native';
 import {COLORS} from '../constants/colors';
 import {useContext} from 'react';
 import {QuizzContext} from '../../store/app_context';
 
 const RestartIcon = ({level}) => {
-  
   const {resetLevelHandler} = useContext(QuizzContext);
   function restartLevel() {
     resetLevelHandler(level);
@@ -22,8 +21,9 @@ const RestartIcon = ({level}) => {
       }}>
       <Image
         source={require('../../assets/ui/undo.png')}
-        style={{width: 50, height: 50, tintColor: COLORS.blossom}}
+        style={{width: 60, height: 60, tintColor: COLORS.blossom}}
       />
+      {/* <Text style={{position: 'absolute', top: 30,right:25}}>reset</Text> */}
     </TouchableOpacity>
   );
 };

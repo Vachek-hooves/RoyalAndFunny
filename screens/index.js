@@ -5,6 +5,8 @@ import StatuteScreen from './StatuteScreen';
 import LevelScreen from './LevelScreen';
 import QuizzScreen from './QuizzScreen';
 import QuizzModal from './QuizzModal';
+import ProfileScreen from './ProfileScreen';
+import HelloScreen from './HelloScreen';
 
 export {
   MainScreen,
@@ -14,4 +16,6 @@ export {
   LevelScreen,
   QuizzScreen,
   QuizzModal,
+  ProfileScreen,
+  HelloScreen,
 };
