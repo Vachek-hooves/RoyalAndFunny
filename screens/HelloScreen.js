@@ -20,7 +20,7 @@ const HelloScreen = ({navigation}) => {
         <Text style={styles.text}>Here you are! </Text>
         <Text style={styles.text}>You are</Text>
         <Text style={styles.text}>WELCOME TO</Text>
-        <Text style={styles.quizText}>Royal and Funny Literary Quiz!</Text>
+        <Text style={styles.quizText}>Royal and Jock Literary Quiz!</Text>
       </Animated.View>
     </View>
   );

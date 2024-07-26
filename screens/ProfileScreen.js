@@ -5,17 +5,19 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 import {submitProfile, getProfile, updateProfile} from '../store/utils';
 import {useState, useEffect} from 'react';
 import {COLORS} from '../components/constants/colors';
 import {appStyles} from '../components/Styles/generalStyles';
-import {ReturnIcon} from '../components/ui';
+import {ImagePicker, ReturnIcon} from '../components/ui';
 
 const ProfileScreen = () => {
   const [profile, setProfile] = useState(null);
-  const [profileInputs, setPfofileInputs] = useState({name: ''});
-  console.log(profile);
+  const [profileInputs, setPfofileInputs] = useState({name: '', image: ''});
+  console.log(profileInputs);
+  // console.log(profile);
 
   const genKey = () => Date.now().toString();
 
@@ -31,14 +33,18 @@ const ProfileScreen = () => {
     setPfofileInputs(prev => ({...prev, [identifier]: newValue}));
   };
 
+  const userImage = image => {
+    saveInputs('image', image);
+  };
+
   const submit = async () => {
-    const {name} = profileInputs;
+    const {name, image} = profileInputs;
     if (!name.trim()) {
       Alert.alert('Problem', 'Name is invalid');
       return;
     }
 
-    const submitData = {profileId: genKey(), name};
+    const submitData = {profileId: genKey(), name, image};
     try {
       await submitProfile(submitData);
       const updatedData = await getProfile();
@@ -47,6 +53,7 @@ const ProfileScreen = () => {
       console.error('Failed to submit:', error);
     }
   };
+
   const resetInputs = () => {
     setPfofileInputs({name: ''});
   };
@@ -73,6 +80,11 @@ const ProfileScreen = () => {
                 onChangeText={value => saveInputs('name', value)}
                 style={styles.inputForm}
               />
+              <View style={styles.btn}>
+                <ImagePicker saveImage={image => userImage(image)}>
+                  <Text style={{fontSize: 18}}>Choose the photo</Text>
+                </ImagePicker>
+              </View>
             </View>
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -95,10 +107,17 @@ const ProfileScreen = () => {
 export const ProfileData = ({profile}) => {
   const [isRename, setIsRename] = useState(false);
   const [profileName, setProfileName] = useState(profile.name);
+  const [profileImage, setProfileImage] = useState(profile.image);
+  // console.log(profileImage);
 
   const nameChange = async () => {
     await updateProfile('name', profileName);
     setIsRename(false);
+  };
+
+  const replaceImage = async image => {
+    setProfileImage(image);
+    await updateProfile('image', image);
   };
 
   return (
@@ -119,13 +138,16 @@ export const ProfileData = ({profile}) => {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+        <View style={{alignItems: 'center', flex: 1, marginTop: 100, gap: 30}}>
           <TouchableOpacity onPress={() => setIsRename(true)}>
             <Text style={styles.profileName}>{profileName}</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.btn}>
-            <Text style={{fontSize: 22}}>Main Menu</Text>
-          </TouchableOpacity> */}
+          <ImagePicker saveImage={image => replaceImage(image)}>
+            <Image
+              source={{uri: profileImage}}
+              style={{height: 150, width: 150, borderRadius: 10}}
+            />
+          </ImagePicker>
         </View>
       )}
     </View>

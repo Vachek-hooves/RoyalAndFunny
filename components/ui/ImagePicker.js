@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity,Alert} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 const ImagePicker = ({saveImage, children}) => {
